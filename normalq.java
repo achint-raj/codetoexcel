@@ -1,3 +1,4 @@
+// implementing normal queue in java
 import java.io.*;
 import java.util.*;
 
@@ -22,7 +23,8 @@ public class normalq {
     void display() {
       // write ur code here
       for(int i=0;i<size;i++){
-        System.out.print(data[front+i]+" ");
+      int idx = (front+i)%data.length;  
+        System.out.print(data[idx]+" ");
       }
       System.out.println();
     }
@@ -32,7 +34,7 @@ public class normalq {
       if(size == data.length)
       System.out.println("Queue Overflow");
       else{
-        int idx = front + size;
+        int idx = (front + size) % data.length; //these are the edge or extrme cases
         data[idx] = val;
         size++;
 
@@ -47,7 +49,7 @@ public class normalq {
     }
     else{
         int val = data[front];
-        front = front+1;
+        front = (front+1)%data.length;
         size--;
         return val;
     }
