@@ -107,6 +107,35 @@ public class levelordertraversal {
 
   }
 
+  public static void levelorderlinewise(Node node){
+    Queue<Node> que = new ArrayDeque<>();
+    Queue<Node> cque = new ArrayDeque<>();
+    que.add(node);
+    while(que.size()>0){
+        node = que.remove();
+        System.out.print(node.data + " ");
+        for(Node child:node.children){
+            cque.add(child);
+        }
+        if(que.size() == 0){
+            que = cque;
+            cque = new ArrayDeque<>();
+            System.out.println();
+        }
+    }
+  }
+  public static boolean find(Node node, int data){
+    if(node.data == data)
+    return true;
+    for(Node child:node.children){
+      boolean fic = find(child,data);
+      if(fic){
+      return true;
+      }
+    }
+    return false;
+  }
+
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
@@ -117,7 +146,11 @@ public class levelordertraversal {
     }
 
     Node root = construct(arr);
-    levelOrder(root);
+    int data = Integer.parseInt(br.readLine());
+    //levelOrder(root);
+    //levelorderlinewise(root);
+    System.out.println(find(root,data));
+
   }
 
 }
