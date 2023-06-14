@@ -104,6 +104,10 @@ public class aretreesimilarinshape {
   return true;
   }
 
+  public static boolean istreeSymmetric(Node node){
+    return aretreesmirror(node,node);
+  }
+
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -115,18 +119,20 @@ public class aretreesimilarinshape {
     }
     Node root1 = construct(arr1);
 
-    int n2 = Integer.parseInt(br.readLine());
-    int[] arr2 = new int[n2];
-    String[] values2 = br.readLine().split(" ");
-    for (int i = 0; i < n2; i++) {
-      arr2[i] = Integer.parseInt(values2[i]);
-    }
-    Node root2 = construct(arr2);
+    // int n2 = Integer.parseInt(br.readLine());
+    // int[] arr2 = new int[n2];
+    // String[] values2 = br.readLine().split(" ");
+    // for (int i = 0; i < n2; i++) {
+    //   arr2[i] = Integer.parseInt(values2[i]);
+    // }
+    // Node root2 = construct(arr2);
 
     // boolean similar = areSimilar(root1, root2);
     // System.out.println(similar);
-    boolean mirror = aretreesmirror(root1, root2);
-    System.out.println(mirror);
+    // boolean mirror = aretreesmirror(root1, root2);
+    // System.out.println(mirror);
+    boolean symmetric = istreeSymmetric(root1);
+    System.out.println(symmetric);
   }
 
 }
