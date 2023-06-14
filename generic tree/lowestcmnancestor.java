@@ -75,6 +75,19 @@ public class lowestcmnancestor {
     i++;j++;
     return p1.get(i);
   }
+  public static int distanceBetweenNodes(Node node, int data1, int data2){
+     ArrayList< Integer> p1 = nodeToRootPath(node, data1);
+    ArrayList< Integer> p2 = nodeToRootPath(node, data2);
+    int i = p1.size() - 1;
+    int j = p2.size() - 1;
+    while (i >= 0 && j >= 0 && p1.get(i) == p2.get(j)) {
+      i--;
+      j--;
+    }
+    i++;
+    j++;
+    return i + j;
+  }
 
   public static void main(String[] args) throws Exception {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -89,8 +102,10 @@ public class lowestcmnancestor {
     int d2 = Integer.parseInt(br.readLine());
 
     Node root = construct(arr);
-    int lca = lca(root, d1, d2);
-    System.out.println(lca);
+    //int lca = lca(root, d1, d2);
+    //System.out.println(lca);
+    int dist = distanceBetweenNodes(root, d1, d2);
+    System.out.println(dist);
     // display(root);
   }
 
