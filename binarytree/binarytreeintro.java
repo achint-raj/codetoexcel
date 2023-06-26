@@ -1,5 +1,6 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
+
 class binarytreeintro {
     public static class Node{
         int data;
@@ -19,6 +20,54 @@ class binarytreeintro {
         this.node = node;
         this.state = state;
       }
+    }
+
+    public static void display(Node node){
+      if(node == null)
+      return;
+      String str = "";
+      str+=node.left == null? "." : node.left.data+"";
+      str+=" <- "+node.data+" -> ";
+      str+=node.right == null? "." : node.right.data+"";
+      System.out.println(str);
+      display(node.left);
+      display(node.right);
+    }
+    
+    public  static void iterativeprepostintraversal(Node node){
+      Stack<Pair> st = new Stack<>();
+      Pair rtp = new Pair(node,1);
+      st.push(rtp);
+      String pre = "";
+      String post = "";
+      String in = "";
+      while(st.size()>0){
+        Pair top = st.peek();
+        if(top.state == 1){  //preorder, state++,left
+           top.state++;
+           pre+=top.node.data+" ";
+
+           if(top.node.left != null){
+            Pair lp = new Pair(top.node.left, 1);
+            st.push(lp);
+           }
+        }
+        else if(top.state == 2){   //inorder, state++, right
+           top.state++;
+           in+=top.node.data+" ";
+
+           if(top.node.right != null){
+            Pair rp = new Pair(top.node.right, 1);
+            st.push(rp);
+           }
+        }else{   //post,pop
+           post+=top.node.data+" ";
+           st.pop();
+        }
+      }
+      System.out.println(pre);
+      System.out.println(in);
+      System.out.println(post);
     }
     public static void main(String args[]) throws Exception{
         Integer arr[] = {50,25,12,null,null,37,30,null,null,null,75,62,null,70,null,null,87,null,null};
@@ -61,6 +110,7 @@ class binarytreeintro {
             st.pop();
           }
         }
-        
+        display(root);
+        iterativeprepostintraversal(root);
     }
 }
